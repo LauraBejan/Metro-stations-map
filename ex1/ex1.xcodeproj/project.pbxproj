@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D3BAB7962121CBE700370D9E /* ImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3BAB7952121CBE700370D9E /* ImageViewController.swift */; };
 		D3F18F9F211C72A8009BD253 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F18F9E211C72A8009BD253 /* AppDelegate.swift */; };
 		D3F18FA1211C72A8009BD253 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F18FA0211C72A8009BD253 /* ViewController.swift */; };
 		D3F18FA4211C72A8009BD253 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D3F18FA2211C72A8009BD253 /* Main.storyboard */; };
@@ -36,6 +37,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D3BAB7952121CBE700370D9E /* ImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewController.swift; sourceTree = "<group>"; };
 		D3F18F9B211C72A8009BD253 /* ex1.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ex1.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D3F18F9E211C72A8009BD253 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D3F18FA0211C72A8009BD253 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -104,6 +106,7 @@
 				D3F18F9E211C72A8009BD253 /* AppDelegate.swift */,
 				D3F18FA0211C72A8009BD253 /* ViewController.swift */,
 				D3F18FA2211C72A8009BD253 /* Main.storyboard */,
+				D3BAB7952121CBE700370D9E /* ImageViewController.swift */,
 				D3F39FA32120C71B00868E4B /* FriendsCompleteViewController.swift */,
 				D3F18FCC211C7343009BD253 /* FriendsCollectionViewCell.swift */,
 				D3F18FA5211C72A9009BD253 /* Assets.xcassets */,
@@ -264,6 +267,7 @@
 			files = (
 				D3F18FA1211C72A8009BD253 /* ViewController.swift in Sources */,
 				D3F39FA42120C71B00868E4B /* FriendsCompleteViewController.swift in Sources */,
+				D3BAB7962121CBE700370D9E /* ImageViewController.swift in Sources */,
 				D3F18FCD211C7343009BD253 /* FriendsCollectionViewCell.swift in Sources */,
 				D3F18F9F211C72A8009BD253 /* AppDelegate.swift in Sources */,
 			);

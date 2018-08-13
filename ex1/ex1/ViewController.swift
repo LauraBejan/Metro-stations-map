@@ -54,6 +54,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         }
     }
     
+    var myBackUpData = ""
     var friendsList = [Friends]()
 
 
@@ -74,21 +75,26 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         readValues()
         
         
+        
+        
         let layout = self.collectionView.collectionViewLayout as! UICollectionViewFlowLayout
         layout.sectionInset = UIEdgeInsetsMake(0, 5, 0, 5)
         layout.minimumInteritemSpacing=5
         layout.itemSize=CGSize(width:(self.collectionView.frame.size.width-20)/2, height:self.collectionView.frame.size.height/3)
+       
         
     
     }
-    
+
+
+
+
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         let myData = storyboard?.instantiateViewController(withIdentifier: "FriendsCompleteViewController") as? FriendsCompleteViewController
         
         let friend: Friends
         friend = friendsList[indexPath.item]
-        print(friend.phoneNumber)
         myData?.detailName = friend.name!
         myData?.detailSurname = friend.surname!
         myData?.detailPhone = friend.phoneNumber!
@@ -101,6 +107,8 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         myData?.detailHouseNumber = myString
         myString = String(indexPath.item)
         myData?.detailImage = myString
+        myBackUpData = myString
+        
         
         self.navigationController?.pushViewController(myData!, animated: true)
     }

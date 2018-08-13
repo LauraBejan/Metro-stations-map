@@ -31,6 +31,8 @@ class FriendsCompleteViewController: UIViewController {
     var detailHouseNumber = ""
     var detailImage = ""
     
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -42,16 +44,26 @@ class FriendsCompleteViewController: UIViewController {
         completeGPS.text = detailGPS
         completePostcode.text = detailPostcode
         completeHouseNumber.text = detailHouseNumber
-        print(detailImage)
         var myInt: Int? = Int(detailImage)
         myInt = myInt! + 1
         detailImage = String(myInt!)
         
         completeImage.image = UIImage(named: detailImage)
-
+        
         // Do any additional setup after loading the view.
     }
+    
 
+    @IBAction func goToFullSizeImage(_ sender: Any) {
+        
+        let myData2 = storyboard?.instantiateViewController(withIdentifier: "ImageViewController") as? ImageViewController
+        
+        myData2?.detailImage2 = detailImage
+        self.navigationController?.pushViewController(myData2!, animated: true)
+        
+    //performSegue(withIdentifier: "fullSizeImage", sender: self)
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
