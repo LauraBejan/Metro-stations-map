@@ -256,10 +256,18 @@
                                     <action selector="goToFullSizeImage:" destination="dDS-c6-eY8" eventType="touchUpInside" id="h4I-12-xij"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7sE-xC-O2h">
+                                <rect key="frame" x="152" y="625" width="71" height="30"/>
+                                <state key="normal" title="Open map"/>
+                                <connections>
+                                    <action selector="openMap:" destination="dDS-c6-eY8" eventType="touchUpInside" id="0Oy-Eq-8ND"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="cey-Ab-Nmn" firstAttribute="baseline" secondItem="BcN-uq-Jbs" secondAttribute="baseline" id="0Ch-U3-wI5"/>
+                            <constraint firstItem="7sE-xC-O2h" firstAttribute="top" secondItem="SF4-GB-cvW" secondAttribute="bottom" constant="8" symbolic="YES" id="1OI-d6-6KA"/>
                             <constraint firstItem="nS3-sj-9Ms" firstAttribute="trailing" secondItem="4OV-L9-sPB" secondAttribute="trailing" constant="169" id="2lT-Rr-Dci"/>
                             <constraint firstItem="ykG-M9-enR" firstAttribute="leading" secondItem="ZLG-vM-hge" secondAttribute="trailing" constant="3" id="2ov-xx-tDz"/>
                             <constraint firstItem="apd-Pe-MIn" firstAttribute="top" secondItem="4OV-L9-sPB" secondAttribute="top" id="3sK-uH-fxf"/>
@@ -300,6 +308,7 @@
                             <constraint firstItem="NA8-x8-lxE" firstAttribute="top" secondItem="ykG-M9-enR" secondAttribute="bottom" id="ccl-g6-ECv"/>
                             <constraint firstItem="cey-Ab-Nmn" firstAttribute="firstBaseline" secondItem="BcN-uq-Jbs" secondAttribute="firstBaseline" id="col-MA-ltW"/>
                             <constraint firstItem="nS3-sj-9Ms" firstAttribute="bottom" secondItem="SF4-GB-cvW" secondAttribute="bottom" constant="50" id="eH9-z7-vjR"/>
+                            <constraint firstItem="7sE-xC-O2h" firstAttribute="centerX" secondItem="7bd-KQ-HdL" secondAttribute="centerX" id="eN9-bd-zEz"/>
                             <constraint firstItem="apd-Pe-MIn" firstAttribute="leading" secondItem="0MB-ft-w8I" secondAttribute="leading" id="fjg-my-Xoz"/>
                             <constraint firstItem="Wjq-Xb-x3q" firstAttribute="leading" secondItem="x5x-vZ-Y6C" secondAttribute="leading" constant="145" id="fvl-ge-Iyq"/>
                             <constraint firstItem="4OV-L9-sPB" firstAttribute="leading" secondItem="apd-Pe-MIn" secondAttribute="trailing" constant="7" id="g8h-O6-fdp"/>

@@ -39,9 +39,10 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         var street: String?
         var houseNumber: Int
         var postcode: Int
-        var gpsCoordinates: String?
+        var latitude: String?
+        var longtiude: String?
         
-        init(surname: String?, name: String?, imgId: String?, phoneNumber: String?, town: String?, street: String?, houseNumber: Int, postcode: Int, gpsCoordinates: String?){
+        init(surname: String?, name: String?, imgId: String?, phoneNumber: String?, town: String?, street: String?, houseNumber: Int, postcode: Int, latitude: String?, longitude: String?){
             self.surname = surname
             self.name = name
             self.imgId = imgId
@@ -50,7 +51,8 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
             self.street = street
             self.houseNumber = houseNumber
             self.postcode = postcode
-            self.gpsCoordinates = gpsCoordinates
+            self.latitude = latitude
+            self.longtiude = longitude
         }
     }
     
@@ -80,7 +82,8 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         let layout = self.collectionView.collectionViewLayout as! UICollectionViewFlowLayout
         layout.sectionInset = UIEdgeInsetsMake(0, 5, 0, 5)
         layout.minimumInteritemSpacing=5
-        layout.itemSize=CGSize(width:(self.collectionView.frame.size.width-20)/2, height:self.collectionView.frame.size.height/3)
+        layout.itemSize=CGSize(width:(self.collectionView.frame.size.width-20)/2,
+                               height:self.collectionView.frame.size.height/3)
        
         
     
@@ -98,7 +101,8 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         myData?.detailName = friend.name!
         myData?.detailSurname = friend.surname!
         myData?.detailPhone = friend.phoneNumber!
-        myData?.detailGPS = friend.gpsCoordinates!
+        myData?.detailLat = friend.latitude!
+        myData?.detailLong = friend.longtiude!
         myData?.detailTown = friend.town!
         myData?.detailStreet = friend.street!
         var myString = String(friend.postcode)
@@ -119,7 +123,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         friendsList.removeAll()
         
         //this is our select query
-        let queryString = "SELECT * FROM FriendTabel"
+        let queryString = "SELECT * FROM Friends"
         
         //statement pointer
         var stmt:OpaquePointer?
@@ -137,19 +141,19 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
             let name = String(cString: sqlite3_column_text(stmt, 1))
             let imgId = String(cString: sqlite3_column_text(stmt, 2))
             let phoneNumber = String(cString: sqlite3_column_text(stmt, 3))
-            print(phoneNumber)
             let town = String(cString: sqlite3_column_text(stmt, 4))
             let street = String(cString: sqlite3_column_text(stmt, 5))
             let houseNumber = sqlite3_column_int(stmt, 6)
-            let postcode = sqlite3_column_int(stmt, 7)
-            let gpsCoordinates = String(cString: sqlite3_column_text(stmt, 8))
+            let postcode = sqlite3_column_int(stmt, 9)
+            let latitude = String(cString: sqlite3_column_text(stmt, 7))
+            let longitude = String(cString: sqlite3_column_text(stmt, 8))
             
             //adding values to list
             friendsList.append(Friends(surname: String(describing: surname), name: String(describing: name),
                                        imgId: String(describing: imgId), phoneNumber: String(describing: phoneNumber),
-                                       town: String( describing: town), street:String(describing: street),
+                                       town: String(describing: town), street:String(describing: street),
                                        houseNumber: Int(houseNumber), postcode: Int(postcode),
-                                       gpsCoordinates: String(describing: gpsCoordinates)))
+                                       latitude: String(describing: latitude), longitude: String(describing: longitude)))
             
         }
         
@@ -171,7 +175,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         var stmt: OpaquePointer?
 
         
-        var queryString = "INSERT INTO FriendTabel (surname, name, photoId,phone, town, street, houseNumber, postcode, gpsCoordinates) VALUES (?,?,?,?,?,?,?,?,?)"
+        var queryString = "INSERT INTO FriendTabel (surname, name, photoId,phone, town, street, houseNumber, latitude, longitude, postcode) VALUES (?,?,?,?,?,?,?,?,?,?)"
         
         //preparing the query
         if sqlite3_prepare(db, queryString, -1, &stmt, nil) != SQLITE_OK{
@@ -219,7 +223,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
             return
         }
         
-        let createTableQuery = "CREATE TABLE IF NOT EXISTS FriendTabel(surname TEXT, name TEXT, photoId STRING, phone TEXT, town TEXT, street TEXT, houseNumber INT, postcode INT, gpsCoordinates TEXT)"
+        let createTableQuery = "CREATE TABLE IF NOT EXISTS Friends(surname TEXT, name TEXT, photoId STRING, phone TEXT, town TEXT, street TEXT, houseNumber INT, latitude TEXT, longitude TEXT, postcode INT)"
         
         if sqlite3_exec(db, createTableQuery, nil, nil, nil) != SQLITE_OK{
             print("Can't create table")
@@ -251,12 +255,13 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
       //  let peopleImg: [UIImage] = [UIImage(named:friend.imgId!)!]
         
         cell.imgFriends.image = peopleImg[indexPath.item]
+  
         var fullName: String?
         fullName = friend.surname! + " " + friend.name!
         cell.labelFriends.text = fullName
         cell.layer.borderColor = UIColor.lightGray.cgColor
         cell.layer.borderWidth = 0.5
-        
+        cell.layer.cornerRadius = 20
         return cell
         
     }

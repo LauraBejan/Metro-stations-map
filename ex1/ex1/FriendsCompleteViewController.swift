@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MapKit
 
 class FriendsCompleteViewController: UIViewController {
 
@@ -26,7 +27,8 @@ class FriendsCompleteViewController: UIViewController {
     var detailPhone = ""
     var detailTown = ""
     var detailStreet = ""
-    var detailGPS = ""
+    var detailLat = ""
+    var detailLong = ""
     var detailPostcode = ""
     var detailHouseNumber = ""
     var detailImage = ""
@@ -41,19 +43,36 @@ class FriendsCompleteViewController: UIViewController {
         completePhone.text = detailPhone
         completeTown.text = detailTown
         completeStreet.text = detailStreet
-        completeGPS.text = detailGPS
+        completeGPS.text = "(" + detailLat + ", " + detailLong + ")"
         completePostcode.text = detailPostcode
         completeHouseNumber.text = detailHouseNumber
         var myInt: Int? = Int(detailImage)
         myInt = myInt! + 1
         detailImage = String(myInt!)
-        
         completeImage.image = UIImage(named: detailImage)
-        
+
         // Do any additional setup after loading the view.
     }
     
-
+    //MAP
+    
+    @IBAction func openMap(_ sender: Any) {
+        
+        let lat: CLLocationDegrees = Double(detailLat)!
+        let long: CLLocationDegrees =  Double(detailLong)!
+        
+        let regDist:CLLocationDistance = 1000
+        let coord = CLLocationCoordinate2DMake(lat, long)
+        let regSpan = MKCoordinateRegionMakeWithDistance(coord, regDist, regDist)
+        let options = [MKLaunchOptionsMapCenterKey: NSValue(mkCoordinate:regSpan.center),
+                       MKLaunchOptionsMapSpanKey: NSValue(mkCoordinateSpan: regSpan.span)]
+        
+        let mark = MKPlacemark( coordinate: coord)
+        let mapItem = MKMapItem(placemark: mark)
+        mapItem.name = detailSurname + "'s location"
+        mapItem.openInMaps(launchOptions: options)
+    }
+    
     @IBAction func goToFullSizeImage(_ sender: Any) {
         
         let myData2 = storyboard?.instantiateViewController(withIdentifier: "ImageViewController") as? ImageViewController
