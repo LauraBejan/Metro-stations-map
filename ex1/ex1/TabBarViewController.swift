@@ -1,124 +1,64 @@
 //
-//  ViewController.swift
+//  TabBarViewController.swift
 //  ex1
 //
-//  Created by Laura on 09/08/2018.
+//  Created by Laura on 14/08/2018.
 //  Copyright © 2018 Laura. All rights reserved.
 //
 
 import UIKit
-import Foundation
 import SQLite3
 
-
-class ViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
+class TabBarViewController: UITabBarController {
     
-  
-    @IBOutlet weak var collectionView: UICollectionView!
+    var test: Int = 1
     
 
-    
-    let peopleImg: [UIImage] = [
-        UIImage(named:"1")!,
-        UIImage(named:"2")!,
-        UIImage(named:"3")!,
-        UIImage(named:"4")!,
-        UIImage(named:"5")!,
-        UIImage(named:"6")!,
-        UIImage(named:"7")!,
-        UIImage(named:"8")!,
-        ]
-    
-    /*
-    
-    
     var db: OpaquePointer?
-    */
     
-
-  
-    var friendsList = [TabBarViewController.Friends]()
-
+    class Friends {
+        
+        var surname: String?
+        var name: String?
+        var imgId: String?
+        var phoneNumber: String?
+        var town: String?
+        var street: String?
+        var houseNumber: Int
+        var postcode: Int
+        var latitude: String?
+        var longtiude: String?
+        
+        init(surname: String?, name: String?, imgId: String?, phoneNumber: String?, town: String?, street: String?, houseNumber: Int, postcode: Int, latitude: String?, longitude: String?){
+            self.surname = surname
+            self.name = name
+            self.imgId = imgId
+            self.phoneNumber = phoneNumber
+            self.town = town
+            self.street = street
+            self.houseNumber = houseNumber
+            self.postcode = postcode
+            self.latitude = latitude
+            self.longtiude = longitude
+        }
+    }
+    
     var myBackUpData = ""
-   // var friendsList = [Friends]()
+    var friendsList = [Friends]()
  
-    var mapList = [TabBarViewController.Friends]()
-
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
-
-      //  friendsList.append(tabBar.friendsList[1])
-     //   print(friendsList[1])
-        collectionView.dataSource=self
-        collectionView.delegate=self
-        
-     //   let indexPath = NSIndexPath(row: 1, section: 1)
-    
-        let tabBar = tabBarController as! TabBarViewController
-        
-        let friend: TabBarViewController.Friends
-        
-        for friend in tabBar.friendsList
-        {
-            friendsList.append(friend)
-        }
-     /*   createDatabase()
+     
+        createDatabase()
         
         //addValuesToDb()
         
         readValues()
-         */
         
-        //STYLING THE CELLS
-        let layout = self.collectionView.collectionViewLayout as!
-                     UICollectionViewFlowLayout
-        layout.sectionInset = UIEdgeInsetsMake(0, 5, 0, 5)
-        layout.minimumInteritemSpacing=5
-        layout.itemSize=CGSize(width:(self.collectionView.frame.size.width-20)/2,
-                               height:self.collectionView.frame.size.height/3)
-       
- 
-    
-    }
-    
-    func createFriendList( indexPath: IndexPath)
-    {
-        let tabBar = tabBarController as! TabBarViewController
-        friendsList.append(tabBar.friendsList[indexPath.item])
+        // Do any additional setup after loading the view.
     }
 
-
-
-
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
-     
-        let myData = storyboard?.instantiateViewController(withIdentifier: "FriendsCompleteViewController") as? FriendsCompleteViewController
-        
-        let friend: TabBarViewController.Friends
-        friend = friendsList[indexPath.item]
-        myData?.detailName = friend.name!
-        myData?.detailSurname = friend.surname!
-        myData?.detailPhone = friend.phoneNumber!
-        myData?.detailLat = friend.latitude!
-        myData?.detailLong = friend.longtiude!
-        myData?.detailTown = friend.town!
-        myData?.detailStreet = friend.street!
-        var myString = String(friend.postcode)
-        myData?.detailPostcode = myString
-        myString = String(friend.houseNumber)
-        myData?.detailHouseNumber = myString
-        myString = String(indexPath.item)
-        myData?.detailImage = myString
-        myBackUpData = myString
-        
-        
-        self.navigationController?.pushViewController(myData!, animated: true)
-    }
-    
-/*    //READ FROM DATABASE
+    //READ FROM DATABASE
     func readValues(){
         
         //first empty the list of heroes
@@ -161,7 +101,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         }
         
     }
-
+    
     //ADD VALUES
     
     func addValuesToDb()
@@ -176,7 +116,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         let postcode = "1070"
         let gpsCoordinates = "(50.8352675, 4.3017115)"
         var stmt: OpaquePointer?
-
+        
         
         let queryString = "INSERT INTO FriendTabel (surname, name, photoId,phone, town, street, houseNumber, latitude, longitude, postcode) VALUES (?,?,?,?,?,?,?,?,?,?)"
         
@@ -213,7 +153,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
             return
         }
     }
-
+    
     
     //CREATE/OPEN DATABASE
     func createDatabase() {
@@ -234,56 +174,21 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         }
         
         print("Database was created succesfully")
-        }
- */
-
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-       
 
-        return friendsList.count
-    }
-    
-    func dataMap(indexPath: IndexPath )
-    {
-      //  let mapDetail = storyboard?.instantiateViewController(withIdentifier: "MapViewController") as? MapViewController
-       // print("smth")
-    //    let map: TabBarViewFriends
-    //    map = mapList[indexPath.item]
-       // mapDetail?.lat = map.latitude!
-       // mapDetail?.long = map.longtiude!
-    //    mapDetail?.name = map.name!
-        
-       // self.navigationController?.pushViewController(mapDetail!, animated: true)
-        
-    }
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
-        let cell=collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! FriendsCollectionViewCell
-        
-        
-        let friend: TabBarViewController.Friends
-        friend = friendsList[indexPath.item]
+    /*
+    // MARK: - Navigation
 
-        
-      //  let peopleImg: [UIImage] = [UIImage(named:friend.imgId!)!]
-        
-        cell.imgFriends.image = peopleImg[indexPath.item]
-  
-        var fullName: String?
-        fullName = friend.surname! + " " + friend.name!
-        cell.labelFriends.text = fullName
-        cell.layer.borderColor = UIColor.lightGray.cgColor
-        cell.layer.borderWidth = 0.5
-        cell.layer.cornerRadius = 20
-        return cell
-        
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Get the new view controller using segue.destinationViewController.
+        // Pass the selected object to the new view controller.
     }
-    
+    */
+
 }
-
-

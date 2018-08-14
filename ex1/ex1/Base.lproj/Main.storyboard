@@ -89,11 +89,11 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
-                    <tabBarItem key="tabBarItem" systemItem="contacts" id="Bdp-V7-f5b"/>
+                    <tabBarItem key="tabBarItem" title="Friends" image="woman" id="Bdp-V7-f5b"/>
                     <navigationItem key="navigationItem" title="Friends" id="Z5Z-ny-vgX"/>
                     <connections>
                         <outlet property="collectionView" destination="4FG-LG-ToJ" id="tc1-eN-dS9"/>
-                        <segue destination="dDS-c6-eY8" kind="show" id="Y0j-WG-0hf"/>
+                        <segue destination="dDS-c6-eY8" kind="show" identifier="FriendFullInfo" id="Y0j-WG-0hf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -413,15 +413,18 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eLn-4G-qQr">
+                            <imageView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="eLn-4G-qQr">
                                 <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                                 <gestureRecognizers/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="eLn-4G-qQr" firstAttribute="height" secondItem="7K8-i3-vVW" secondAttribute="height" id="5O3-h2-hJw"/>
+                            <constraint firstItem="eLn-4G-qQr" firstAttribute="bottom" secondItem="cy1-DZ-4du" secondAttribute="bottom" id="Aa5-u8-jWj"/>
+                            <constraint firstItem="eLn-4G-qQr" firstAttribute="leading" secondItem="cy1-DZ-4du" secondAttribute="leading" id="Imx-Sn-SUY"/>
                             <constraint firstItem="eLn-4G-qQr" firstAttribute="width" secondItem="7K8-i3-vVW" secondAttribute="width" id="LYk-Xc-PLs"/>
+                            <constraint firstItem="eLn-4G-qQr" firstAttribute="trailing" secondItem="cy1-DZ-4du" secondAttribute="trailing" id="ST4-ER-95r"/>
+                            <constraint firstItem="eLn-4G-qQr" firstAttribute="top" secondItem="cy1-DZ-4du" secondAttribute="top" id="Y3f-uV-5cg"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="cy1-DZ-4du"/>
                     </view>
@@ -450,26 +453,42 @@
             </objects>
             <point key="canvasLocation" x="-1948" y="819"/>
         </scene>
-        <!--View Controller-->
+        <!--Map-->
         <scene sceneID="H1J-ll-Tb8">
             <objects>
-                <viewController id="BPq-rf-Rzk" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MapViewController" id="BPq-rf-Rzk" customClass="MapViewController" customModule="ex1" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="n73-IQ-RG8">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="usQ-3X-3xq">
+                                <rect key="frame" x="0.0" y="20" width="375" height="598"/>
+                            </mapView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="usQ-3X-3xq" firstAttribute="leading" secondItem="n73-IQ-RG8" secondAttribute="leading" id="94g-48-DXy"/>
+                            <constraint firstAttribute="trailing" secondItem="usQ-3X-3xq" secondAttribute="trailing" id="AUz-0U-eZB"/>
+                            <constraint firstItem="usQ-3X-3xq" firstAttribute="top" secondItem="2CU-oq-V7T" secondAttribute="top" id="hcu-Dk-ovJ"/>
+                            <constraint firstItem="usQ-3X-3xq" firstAttribute="bottom" secondItem="2CU-oq-V7T" secondAttribute="bottom" id="i3k-Uw-aoL"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="2CU-oq-V7T"/>
                     </view>
-                    <tabBarItem key="tabBarItem" id="Gfg-SS-V4B"/>
+                    <tabBarItem key="tabBarItem" title="Map" image="map-pin" id="Gfg-SS-V4B">
+                        <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="0.0"/>
+                    </tabBarItem>
+                    <connections>
+                        <outlet property="myMap" destination="usQ-3X-3xq" id="8jK-yn-9TF"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ekh-E0-56b" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-751" y="-343"/>
+            <point key="canvasLocation" x="-751.20000000000005" y="-343.17841079460271"/>
         </scene>
-        <!--Tab Bar Controller-->
+        <!--Tab Bar View Controller-->
         <scene sceneID="Oo8-NC-IGT">
             <objects>
-                <tabBarController id="HvK-rU-Ch1" sceneMemberID="viewController">
+                <tabBarController id="HvK-rU-Ch1" customClass="TabBarViewController" customModule="ex1" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="vgb-yX-YbT">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -504,4 +523,8 @@
             <point key="canvasLocation" x="-770" y="352"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="map-pin" width="30" height="30"/>
+        <image name="woman" width="30" height="30"/>
+    </resources>
 </document>

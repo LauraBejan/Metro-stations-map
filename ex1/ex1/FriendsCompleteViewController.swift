@@ -53,22 +53,8 @@ class FriendsCompleteViewController: UIViewController {
         detailImage = String(myInt!)
         completeImage.image = UIImage(named: detailImage)
         
-        //map
+        //MAP CARD
         
-        /*let lat: CLLocationDegrees = Double(detailLat)!
-        let long: CLLocationDegrees =  Double(detailLong)!
-        
-        let regDist:CLLocationDistance = 1000
-        let coord = CLLocationCoordinate2DMake(lat, long)
-        let regSpan = MKCoordinateRegionMakeWithDistance(coord, regDist, regDist)
-        let options = [MKLaunchOptionsMapCenterKey: NSValue(mkCoordinate:regSpan.center),
-                       MKLaunchOptionsMapSpanKey: NSValue(mkCoordinateSpan: regSpan.span)]
-        
-        let mark = MKPlacemark( coordinate: coord)
-        let mapItem = MKMapItem(placemark: mark)
-        mapItem.name = detailSurname + "'s location"
-        mapItem.openInMaps(launchOptions: options)
- */
         let span:MKCoordinateSpan = MKCoordinateSpanMake(0.8, 0.8)
         
         let location: CLLocationCoordinate2D = CLLocationCoordinate2DMake(Double(detailLat)!, Double(detailLong)!)
@@ -83,7 +69,7 @@ class FriendsCompleteViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
-    //MAP
+    
  
     
     @IBAction func goToFullSizeImage(_ sender: Any) {
