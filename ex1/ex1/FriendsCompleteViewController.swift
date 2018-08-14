@@ -22,6 +22,8 @@ class FriendsCompleteViewController: UIViewController {
     @IBOutlet weak var completePostcode: UILabel!
     @IBOutlet weak var completeHouseNumber: UILabel!
     
+    @IBOutlet weak var mapView: MKMapView!
+    
     var detailName = ""
     var detailSurname = ""
     var detailPhone = ""
@@ -50,15 +52,10 @@ class FriendsCompleteViewController: UIViewController {
         myInt = myInt! + 1
         detailImage = String(myInt!)
         completeImage.image = UIImage(named: detailImage)
-
-        // Do any additional setup after loading the view.
-    }
-    
-    //MAP
-    
-    @IBAction func openMap(_ sender: Any) {
         
-        let lat: CLLocationDegrees = Double(detailLat)!
+        //map
+        
+        /*let lat: CLLocationDegrees = Double(detailLat)!
         let long: CLLocationDegrees =  Double(detailLong)!
         
         let regDist:CLLocationDistance = 1000
@@ -71,7 +68,23 @@ class FriendsCompleteViewController: UIViewController {
         let mapItem = MKMapItem(placemark: mark)
         mapItem.name = detailSurname + "'s location"
         mapItem.openInMaps(launchOptions: options)
+ */
+        let span:MKCoordinateSpan = MKCoordinateSpanMake(0.8, 0.8)
+        
+        let location: CLLocationCoordinate2D = CLLocationCoordinate2DMake(Double(detailLat)!, Double(detailLong)!)
+        let region: MKCoordinateRegion = MKCoordinateRegionMake( location, span)
+        mapView.setRegion(region, animated: true)
+        
+        let mark = MKPointAnnotation()
+        
+        mark.coordinate = location
+        mark.title = completeName.text! + "'s location"
+        mapView.addAnnotation(mark)
+        // Do any additional setup after loading the view.
     }
+    
+    //MAP
+ 
     
     @IBAction func goToFullSizeImage(_ sender: Any) {
         

@@ -142,6 +142,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
             let imgId = String(cString: sqlite3_column_text(stmt, 2))
             let phoneNumber = String(cString: sqlite3_column_text(stmt, 3))
             let town = String(cString: sqlite3_column_text(stmt, 4))
+            print(town)
             let street = String(cString: sqlite3_column_text(stmt, 5))
             let houseNumber = sqlite3_column_int(stmt, 6)
             let postcode = sqlite3_column_int(stmt, 9)
