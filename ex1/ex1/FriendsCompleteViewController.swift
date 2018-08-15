@@ -55,7 +55,7 @@ class FriendsCompleteViewController: UIViewController {
         
         //MAP CARD
         
-        let span:MKCoordinateSpan = MKCoordinateSpanMake(0.8, 0.8)
+        let span:MKCoordinateSpan = MKCoordinateSpanMake(0.001, 0.001)
         
         let location: CLLocationCoordinate2D = CLLocationCoordinate2DMake(Double(detailLat)!, Double(detailLong)!)
         let region: MKCoordinateRegion = MKCoordinateRegionMake( location, span)
@@ -64,9 +64,8 @@ class FriendsCompleteViewController: UIViewController {
         let mark = MKPointAnnotation()
         
         mark.coordinate = location
-        mark.title = completeName.text! + "'s location"
+        mark.title = completeSurname.text! + "'s location"
         mapView.addAnnotation(mark)
-        // Do any additional setup after loading the view.
     }
     
     
@@ -79,7 +78,6 @@ class FriendsCompleteViewController: UIViewController {
         myData2?.detailImage2 = detailImage
         self.navigationController?.pushViewController(myData2!, animated: true)
         
-    //performSegue(withIdentifier: "fullSizeImage", sender: self)
     }
     
     override func didReceiveMemoryWarning() {

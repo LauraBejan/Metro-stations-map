@@ -14,31 +14,15 @@ class ImageViewController: UIViewController {
     
     var detailImage2 = ""
     
-    //var mainViewController:ViewController?
-    
 
-
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-     //   print(mydetailImage)
-       // var myInt: Int? = Int(mydetailImage)
-       // myInt = myInt! + 1
-      //  mydetailImage = String(myInt!)
-        print(detailImage2)
 
-        
-        fullSizeImage.image = UIImage(named: detailImage2) //UIImage(named: mydetailImage)
-
-        
-        
-        // Do any additional setup after loading the view.
+        fullSizeImage.image = UIImage(named: detailImage2)
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
 

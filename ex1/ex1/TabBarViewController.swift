@@ -49,135 +49,65 @@ class TabBarViewController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
      
-        createDatabase()
+        addHardCodedData()
         
-        //addValuesToDb()
-        
-        readValues()
-        
-        // Do any additional setup after loading the view.
+
     }
 
-    //READ FROM DATABASE
-    func readValues(){
-        
-        //first empty the list of heroes
-        friendsList.removeAll()
-        
-        //this is our select query
-        let queryString = "SELECT * FROM Friends"
-        
-        //statement pointer
-        var stmt:OpaquePointer?
-        
-        //preparing the query
-        if sqlite3_prepare(db, queryString, -1, &stmt, nil) != SQLITE_OK{
-            let errmsg = String(cString: sqlite3_errmsg(db)!)
-            print("error preparing insert: \(errmsg)")
-            return
-        }
-        
-        //traversing through all the records
-        while(sqlite3_step(stmt) == SQLITE_ROW){
-            let surname = String(cString: sqlite3_column_text(stmt, 0))
-            let name = String(cString: sqlite3_column_text(stmt, 1))
-            let imgId = String(cString: sqlite3_column_text(stmt, 2))
-            let phoneNumber = String(cString: sqlite3_column_text(stmt, 3))
-            let town = String(cString: sqlite3_column_text(stmt, 4))
-            print(town)
-            let street = String(cString: sqlite3_column_text(stmt, 5))
-            let houseNumber = sqlite3_column_int(stmt, 6)
-            let postcode = sqlite3_column_int(stmt, 9)
-            let latitude = String(cString: sqlite3_column_text(stmt, 7))
-            let longitude = String(cString: sqlite3_column_text(stmt, 8))
-            
-            //adding values to list
-            friendsList.append(Friends(surname: String(describing: surname), name: String(describing: name),
-                                       imgId: String(describing: imgId), phoneNumber: String(describing: phoneNumber),
-                                       town: String(describing: town), street:String(describing: street),
-                                       houseNumber: Int(houseNumber), postcode: Int(postcode),
-                                       latitude: String(describing: latitude), longitude: String(describing: longitude)))
-            
-        }
-        
-    }
-    
-    //ADD VALUES
-    
-    func addValuesToDb()
+    func addHardCodedData()
     {
-        let surname = "Ana"
-        let name = "Smith"
-        let photoId = "1"
-        let phone = "0741081350"
-        let town = "Brussels"
-        let street = "Rue de la Procession"
-        let houseNumber = "4"
-        let postcode = "1070"
-        let gpsCoordinates = "(50.8352675, 4.3017115)"
-        var stmt: OpaquePointer?
+        friendsList.append(Friends(surname: "Anna", name: "Pharis",
+                                   imgId: "1", phoneNumber: "0741081390",
+                                   town: "Brussels", street: "Quai de l'Industrie",
+                                   houseNumber: 5, postcode: 1070,
+                                   latitude: "50.8417781", longitude: "4.3228688"))
         
+        friendsList.append(Friends(surname: "Kendall", name: "Smith",
+                                   imgId: "2", phoneNumber: "0741889880",
+                                   town: "Brussels", street: "Montigny-le-Tilleul",
+                                   houseNumber: 29, postcode: 2900,
+                                   latitude: "50.3816464", longitude: "4.3755300"))
         
-        let queryString = "INSERT INTO FriendTabel (surname, name, photoId,phone, town, street, houseNumber, latitude, longitude, postcode) VALUES (?,?,?,?,?,?,?,?,?,?)"
+        friendsList.append(Friends(surname: "Cezara", name: "Orwin",
+                                   imgId: "3", phoneNumber: "0787487390",
+                                   town: "Antwerp", street: "Quai de la Niege",
+                                   houseNumber: 135, postcode: 2300,
+                                   latitude: "51.260197", longitude: "4.402771"))
         
-        //preparing the query
-        if sqlite3_prepare(db, queryString, -1, &stmt, nil) != SQLITE_OK{
-            let errmsg = String(cString: sqlite3_errmsg(db)!)
-            print("error preparing insert: \(errmsg)")
-            return
-        }
+        friendsList.append(Friends(surname: "Aaron", name: "Rowen",
+                                   imgId: "4", phoneNumber: "0741168430",
+                                   town: "Bruges", street: "Rue de Chien",
+                                   houseNumber: 24, postcode: 2000,
+                                   latitude: "51.2093", longitude: "3.2247"))
         
-        if sqlite3_bind_text(stmt, 1, surname, -1, nil) != SQLITE_OK{
-            let errmsg = String(cString: sqlite3_errmsg(db)!)
-            print("failure binding surname: \(errmsg)")
-            return
-        }
+        friendsList.append(Friends(surname: "Alexandru", name: "David",
+                                   imgId: "5", phoneNumber: "0741095378",
+                                   town: "Amsterdam", street: "Rue de la Rennaisance",
+                                   houseNumber: 22, postcode: 4800,
+                                   latitude: "52.3702", longitude: "4.8952"))
         
-        if sqlite3_bind_text(stmt, 2, name, -1, nil) != SQLITE_OK{
-            let errmsg = String(cString: sqlite3_errmsg(db)!)
-            print("failure binding name: \(errmsg)")
-            return
-        }
+        friendsList.append(Friends(surname: "Andrea", name: "Willow",
+                                   imgId: "6", phoneNumber: "0741095278",
+                                   town: "Ghent", street: "Sint-Baafsplein",
+                                   houseNumber: 97, postcode: 2400,
+                                   latitude: "51.0543", longitude: "3.7174"))
         
-        sqlite3_bind_text(stmt, 3, photoId, -1, nil)
-        sqlite3_bind_text(stmt, 4, phone, -1, nil)
-        sqlite3_bind_text(stmt, 5, town, -1, nil)
-        sqlite3_bind_text(stmt, 6, street, -1, nil)
-        sqlite3_bind_text(stmt, 7, houseNumber, -1, nil)
-        sqlite3_bind_text(stmt, 8, postcode, -1, nil)
-        sqlite3_bind_text(stmt, 9, gpsCoordinates, -1, nil)
+        friendsList.append(Friends(surname: "Maria", name: "Sand",
+                                   imgId: "7", phoneNumber: "0742781390",
+                                   town: "Ixelles", street: "Avenue Louise",
+                                   houseNumber: 106, postcode: 4050,
+                                   latitude: "50.8333", longitude: "4.3666"))
         
-        if sqlite3_step(stmt) != SQLITE_DONE {
-            let errmsg = String(cString: sqlite3_errmsg(db)!)
-            print("failure inserting hero: \(errmsg)")
-            return
-        }
+        friendsList.append(Friends(surname: "Christina", name: "Rosly",
+                                   imgId: "8", phoneNumber: "0741081532",
+                                   town: "Anderlecht", street: "Rue de la Procession",
+                                   houseNumber: 14, postcode: 3000,
+                                   latitude: "50.8366", longitude: "4.3082"))
     }
+
     
-    
-    //CREATE/OPEN DATABASE
-    func createDatabase() {
-        let fileUrl = try!
-            FileManager.default.url(for: .documentDirectory,
-                                    in: .userDomainMask, appropriateFor: nil, create: false).appendingPathComponent("FriendsDatabase.sqlite")
-        
-        if sqlite3_open(fileUrl.path, &db) != SQLITE_OK{
-            print(" Can't open the database")
-            return
-        }
-        
-        let createTableQuery = "CREATE TABLE IF NOT EXISTS Friends(surname TEXT, name TEXT, photoId STRING, phone TEXT, town TEXT, street TEXT, houseNumber INT, latitude TEXT, longitude TEXT, postcode INT)"
-        
-        if sqlite3_exec(db, createTableQuery, nil, nil, nil) != SQLITE_OK{
-            print("Can't create table")
-            return
-        }
-        
-        print("Database was created succesfully")
-    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
 
