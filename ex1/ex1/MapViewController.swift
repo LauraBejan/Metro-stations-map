@@ -28,7 +28,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate , MKMapView
         {
 
             tracker.requestAlwaysAuthorization()
-            tracker.startUpdatingLocation()
         }
         
         let tabBar = tabBarController as! TabBarViewController
@@ -54,7 +53,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate , MKMapView
             let myLong = Double(friend.longtiude!)
             let location: CLLocationCoordinate2D = CLLocationCoordinate2DMake(myLat!, myLong!)
             let region: MKCoordinateRegion = MKCoordinateRegionMake( location, span)
-            myMap.setRegion(region, animated: true)
         
             let mark = MKPointAnnotation()
         
@@ -66,12 +64,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate , MKMapView
 
     }
     
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        if let location = locations.last{
-            let center = CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
-            let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
-        }
-    }
+
    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
