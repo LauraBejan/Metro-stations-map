@@ -16,20 +16,20 @@ class MapViewController: UIViewController, CLLocationManagerDelegate , MKMapView
     
     var friendsList = [TabBarViewController.Friends]()
     
-    let tracker = CLLocationManager()
+    var tracker = CLLocationManager()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         tracker.delegate = self
         tracker.desiredAccuracy = kCLLocationAccuracyBest
-        tracker.requestWhenInUseAuthorization()
-        tracker.startUpdatingLocation()
         
-        let devicelatitude = (tracker.location?.coordinate.latitude)!
-        let devicelongitude = (tracker.location?.coordinate.longitude)!
-        print(devicelatitude)
-        print(devicelongitude)
+        if (CLLocationManager.locationServicesEnabled())
+        {
+
+            tracker.requestAlwaysAuthorization()
+            tracker.startUpdatingLocation()
+        }
         
         let tabBar = tabBarController as! TabBarViewController
  
@@ -40,8 +40,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate , MKMapView
         
         addMarksOnMap()
         
-        
-
     }
     
     func addMarksOnMap()
@@ -69,33 +67,16 @@ class MapViewController: UIViewController, CLLocationManagerDelegate , MKMapView
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        
-        let userLocation = locations[0]
-        
-        let span:MKCoordinateSpan = MKCoordinateSpanMake(1, 1)
-     //   print(userLocation.coordinate.latitude)
-     //   print(userLocation.coordinate.longitude)
-        let location: CLLocationCoordinate2D = CLLocationCoordinate2DMake(userLocation.coordinate.latitude, userLocation.coordinate.longitude)
-        
-        let region: MKCoordinateRegion = MKCoordinateRegionMake( location, span)
-        myMap.setRegion(region, animated: true)
-        
-        self.myMap.showsUserLocation = true
+        if let location = locations.last{
+            let center = CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
+            let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
+        }
     }
-
+   
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
     
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

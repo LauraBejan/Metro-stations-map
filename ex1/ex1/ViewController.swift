@@ -8,7 +8,8 @@
 
 import UIKit
 import Foundation
-import SQLite3
+import CoreLocation
+import MapKit
 
 
 class ViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
